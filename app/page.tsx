@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react"
 import { Home, MessageCircle, UtensilsCrossed, BarChart3, User } from "lucide-react"
-import { ThemeToggle } from "@/components/theme-toggle"
 import DashboardScreen from "@/components/screens/dashboard-screen"
 import ChatScreen from "@/components/screens/chat-screen"
 import RecipesScreen from "@/components/screens/recipes-screen"
@@ -50,12 +49,7 @@ export default function TelegramNutritionApp() {
 
   return (
     <div className="min-h-screen bg-surface text-on-surface transition-all duration-300">
-      {/* Theme Toggle - Fixed Position */}
-      <div className="fixed top-6 right-6 z-50">
-        <ThemeToggle />
-      </div>
-
-      {/* Main Content */}
+      {/* Main Content - No theme toggle button here anymore */}
       <main
         className={`pb-20 min-h-screen transition-all duration-500 ${isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
       >

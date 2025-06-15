@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { User, Target, Settings, HelpCircle, Edit3, Save, X, Calculator, Activity } from "lucide-react"
+import { ThemeSettings } from "@/components/theme-settings"
 
 type ProfileTab = "profile" | "goals" | "preferences" | "help"
 
@@ -108,7 +109,7 @@ export default function ProfileScreen() {
           {profile.name}
         </h1>
         <p className="text-on-surface-variant text-base sm:text-lg font-medium px-4">
-          Manage your fitness profile and goals
+          Manage your fitness profile and preferences
         </p>
       </div>
 
@@ -333,9 +334,17 @@ export default function ProfileScreen() {
       )}
 
       {activeTab === "preferences" && (
-        <div className="space-y-6">
+        <div className="space-y-8">
+          {/* Theme Settings - New centralized location */}
           <div
-            className={`bg-surface-container rounded-3xl p-8 shadow-xl border border-outline-variant transition-all duration-700 delay-200 ${isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
+            className={`transition-all duration-700 delay-200 ${isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
+          >
+            <ThemeSettings />
+          </div>
+
+          {/* Other App Preferences */}
+          <div
+            className={`bg-surface-container rounded-3xl p-8 shadow-xl border border-outline-variant transition-all duration-700 delay-300 ${isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
           >
             <h2 className="text-2xl font-bold text-on-surface mb-6 bg-gradient-fitness-energy bg-clip-text text-transparent">
               App Preferences ⚙️
