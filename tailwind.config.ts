@@ -1,16 +1,21 @@
 import type { Config } from "tailwindcss"
+import defaultConfig from "shadcn/ui/tailwind.config"
 
 const config: Config = {
-  darkMode: "class",
+  ...defaultConfig,
   content: [
+    ...defaultConfig.content,
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    ...defaultConfig.theme,
     extend: {
+      ...defaultConfig.theme.extend,
       colors: {
+        ...defaultConfig.theme.extend.colors,
         // Telegram theme colors
         "tg-bg": "var(--tg-theme-bg-color)",
         "tg-text": "var(--tg-theme-text-color)",
@@ -78,26 +83,24 @@ const config: Config = {
         "safe-left": "env(safe-area-inset-left)",
         "safe-right": "env(safe-area-inset-right)",
       },
-      borderRadius: {
-        lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
-      },
       animation: {
         shimmer: "shimmer 2s infinite",
         "fade-in": "fade-in 0.5s ease-out",
         "pulse-glow": "pulse-glow 2s infinite",
+        "theme-switch": "theme-switch 0.6s ease-in-out",
       },
       backgroundImage: {
         "gradient-fitness-primary": "linear-gradient(135deg, var(--fitness-primary), var(--fitness-secondary))",
         "gradient-fitness-energy": "linear-gradient(135deg, var(--fitness-tertiary), var(--fitness-accent))",
         "gradient-fitness-health": "linear-gradient(135deg, var(--fitness-secondary), var(--fitness-success))",
       },
+      boxShadow: {
+        "dark-glow": "0 0 20px rgba(6, 182, 212, 0.3)",
+        "dark-glow-lg": "0 0 40px rgba(6, 182, 212, 0.2)",
+      },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [...defaultConfig.plugins, require("tailwindcss-animate")],
 }
-
-export default config
 
 export default config

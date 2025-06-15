@@ -12,7 +12,7 @@
   --tg-theme-button-text-color: #ffffff;
   --tg-theme-secondary-bg-color: #f1f1f1;
 
-  /* Fitness-Inspired Color Palette */
+  /* Light Mode - Fitness-Inspired Color Palette */
   /* Primary - Deep Teal (Water/Hydration/Fitness) */
   --fitness-primary: #0891b2;
   --fitness-primary-container: #cffafe;
@@ -83,45 +83,84 @@
   --fitness-fiber-container: #f0fdf4;
 }
 
-/* Dark theme support with fitness colors */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --tg-theme-bg-color: #0f172a;
-    --tg-theme-text-color: #f8fafc;
-    --tg-theme-hint-color: #64748b;
-    --tg-theme-link-color: #0ea5e9;
-    --tg-theme-secondary-bg-color: #1e293b;
+/* Dark Mode - Enhanced Fitness Colors */
+.dark {
+  --tg-theme-bg-color: #0f172a;
+  --tg-theme-text-color: #f8fafc;
+  --tg-theme-hint-color: #64748b;
+  --tg-theme-link-color: #0ea5e9;
+  --tg-theme-secondary-bg-color: #1e293b;
 
-    /* Dark theme fitness colors */
-    --fitness-primary: #0ea5e9;
-    --fitness-primary-container: #0c4a6e;
-    --fitness-on-primary: #000000;
-    --fitness-on-primary-container: #bae6fd;
+  /* Dark theme fitness colors - Enhanced contrast and vibrancy */
+  --fitness-primary: #06b6d4;
+  --fitness-primary-container: #164e63;
+  --fitness-on-primary: #000000;
+  --fitness-on-primary-container: #67e8f9;
 
-    --fitness-secondary: #10b981;
-    --fitness-secondary-container: #064e3b;
-    --fitness-on-secondary: #000000;
-    --fitness-on-secondary-container: #a7f3d0;
+  --fitness-secondary: #22c55e;
+  --fitness-secondary-container: #166534;
+  --fitness-on-secondary: #000000;
+  --fitness-on-secondary-container: #86efac;
 
-    --fitness-tertiary: #f97316;
-    --fitness-tertiary-container: #9a3412;
-    --fitness-on-tertiary: #000000;
-    --fitness-on-tertiary-container: #fed7aa;
+  --fitness-tertiary: #fb923c;
+  --fitness-tertiary-container: #9a3412;
+  --fitness-on-tertiary: #000000;
+  --fitness-on-tertiary-container: #fed7aa;
 
-    --fitness-accent: #8b5cf6;
-    --fitness-accent-container: #4c1d95;
-    --fitness-on-accent: #000000;
-    --fitness-on-accent-container: #ddd6fe;
+  --fitness-accent: #a855f7;
+  --fitness-accent-container: #581c87;
+  --fitness-on-accent: #000000;
+  --fitness-on-accent-container: #e9d5ff;
 
-    --fitness-surface: #0f172a;
-    --fitness-surface-container: #1e293b;
-    --fitness-surface-variant: #334155;
-    --fitness-on-surface: #f8fafc;
-    --fitness-on-surface-variant: #cbd5e1;
+  --fitness-success: #22c55e;
+  --fitness-success-container: #166534;
+  --fitness-on-success: #000000;
+  --fitness-on-success-container: #86efac;
 
-    --fitness-outline: #475569;
-    --fitness-outline-variant: #334155;
-  }
+  --fitness-warning: #fbbf24;
+  --fitness-warning-container: #92400e;
+  --fitness-on-warning: #000000;
+  --fitness-on-warning-container: #fde68a;
+
+  --fitness-error: #f87171;
+  --fitness-error-container: #991b1b;
+  --fitness-on-error: #000000;
+  --fitness-on-error-container: #fecaca;
+
+  /* Dark Surface Colors */
+  --fitness-surface: #0f172a;
+  --fitness-surface-container: #1e293b;
+  --fitness-surface-variant: #334155;
+  --fitness-on-surface: #f8fafc;
+  --fitness-on-surface-variant: #cbd5e1;
+
+  /* Dark Outline Colors */
+  --fitness-outline: #475569;
+  --fitness-outline-variant: #334155;
+
+  /* Dark Macro Colors - Enhanced visibility */
+  --fitness-protein: #f87171;
+  --fitness-protein-container: #7f1d1d;
+
+  --fitness-carbs: #60a5fa;
+  --fitness-carbs-container: #1e3a8a;
+
+  --fitness-fat: #fbbf24;
+  --fitness-fat-container: #92400e;
+
+  --fitness-fiber: #34d399;
+  --fitness-fiber-container: #065f46;
+}
+
+/* Ensure smooth transitions for theme changes */
+html {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body {
+  background-color: var(--fitness-surface);
+  color: var(--fitness-on-surface);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Safe area handling for mobile devices */
@@ -151,7 +190,7 @@
   background: var(--fitness-secondary);
 }
 
-/* Toggle switch styles with fitness colors */
+/* Enhanced toggle switch styles with dark mode support */
 .toggle {
   appearance: none;
   width: 44px;
@@ -160,27 +199,36 @@
   border-radius: 12px;
   position: relative;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: background-color 0.3s ease;
+  border: 2px solid transparent;
 }
 
 .toggle:checked {
   background: var(--fitness-primary);
 }
 
+.toggle:focus {
+  outline: none;
+  border-color: var(--fitness-primary);
+  box-shadow: 0 0 0 2px var(--fitness-primary-container);
+}
+
 .toggle::before {
   content: "";
   position: absolute;
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   border-radius: 50%;
-  background: white;
-  top: 2px;
-  left: 2px;
-  transition: transform 0.2s;
+  background: var(--fitness-on-surface);
+  top: 1px;
+  left: 1px;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .toggle:checked::before {
   transform: translateX(20px);
+  background: var(--fitness-on-primary);
 }
 
 /* Focus styles for accessibility */
@@ -191,11 +239,12 @@ select:focus-visible {
   outline-offset: 2px;
 }
 
-/* Smooth transitions */
+/* Smooth transitions for dark mode - Enhanced */
 * {
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, transform;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, transform,
+    box-shadow;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 200ms;
+  transition-duration: 300ms;
 }
 
 /* Custom animations */
@@ -229,6 +278,18 @@ select:focus-visible {
   }
 }
 
+@keyframes theme-switch {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    transform: rotate(180deg) scale(1.1);
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+  }
+}
+
 .animate-shimmer {
   animation: shimmer 2s infinite;
 }
@@ -241,7 +302,11 @@ select:focus-visible {
   animation: pulse-glow 2s infinite;
 }
 
-/* Gradient backgrounds for fitness theme */
+.animate-theme-switch {
+  animation: theme-switch 0.6s ease-in-out;
+}
+
+/* Gradient backgrounds for fitness theme - Dark mode compatible */
 .gradient-fitness-primary {
   background: linear-gradient(135deg, var(--fitness-primary), var(--fitness-secondary));
 }
@@ -252,4 +317,40 @@ select:focus-visible {
 
 .gradient-fitness-health {
   background: linear-gradient(135deg, var(--fitness-secondary), var(--fitness-success));
+}
+
+/* Dark mode specific gradients */
+.dark .gradient-fitness-primary {
+  background: linear-gradient(135deg, var(--fitness-primary), var(--fitness-secondary));
+  box-shadow: 0 4px 20px rgba(6, 182, 212, 0.3);
+}
+
+.dark .gradient-fitness-energy {
+  background: linear-gradient(135deg, var(--fitness-tertiary), var(--fitness-accent));
+  box-shadow: 0 4px 20px rgba(251, 146, 60, 0.3);
+}
+
+.dark .gradient-fitness-health {
+  background: linear-gradient(135deg, var(--fitness-secondary), var(--fitness-success));
+  box-shadow: 0 4px 20px rgba(34, 197, 94, 0.3);
+}
+
+/* Ensure proper theme application */
+.dark * {
+  border-color: var(--fitness-outline-variant);
+}
+
+.dark input,
+.dark textarea,
+.dark select {
+  background-color: var(--fitness-surface-variant);
+  color: var(--fitness-on-surface);
+  border-color: var(--fitness-outline-variant);
+}
+
+.dark input:focus,
+.dark textarea:focus,
+.dark select:focus {
+  border-color: var(--fitness-primary);
+  box-shadow: 0 0 0 2px var(--fitness-primary-container);
 }
