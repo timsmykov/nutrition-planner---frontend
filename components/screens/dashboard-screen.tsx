@@ -107,15 +107,15 @@ export default function DashboardScreen() {
   }
 
   return (
-    <div className="p-6 space-y-8 bg-gradient-to-br from-surface via-surface to-primary-container/5 min-h-screen">
+    <div className="p-6 space-y-8 bg-background min-h-screen">
       {/* Header */}
       <div
         className={`text-center transition-all duration-700 ${isLoaded ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"}`}
       >
-        <h1 className="text-3xl font-bold text-on-surface mb-2 tracking-tight bg-gradient-fitness-primary bg-clip-text text-transparent">
+        <h1 className="text-3xl font-bold text-foreground mb-2 tracking-tight bg-gradient-to-r from-primary to-primary bg-clip-text text-transparent">
           Good morning, Alex! 💪
         </h1>
-        <p className="text-on-surface-variant text-base font-medium">{currentDate}</p>
+        <p className="text-muted-foreground text-base font-medium">{currentDate}</p>
       </div>
 
       {/* Daily Goals Card - Fitness Theme */}

@@ -48,7 +48,7 @@ export default function TelegramNutritionApp() {
   }
 
   return (
-    <div className="min-h-screen bg-surface text-on-surface transition-all duration-300">
+    <div className="min-h-screen bg-background text-foreground transition-all duration-300 animate-fade-in">
       {/* Main Content - No theme toggle button here anymore */}
       <main
         className={`pb-20 min-h-screen transition-all duration-500 ${isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
@@ -56,12 +56,12 @@ export default function TelegramNutritionApp() {
         {renderScreen()}
       </main>
 
-      {/* Bottom Navigation - Enhanced for Dark Mode */}
-      <nav className="fixed bottom-0 left-0 right-0 bg-surface-container/95 backdrop-blur-md border-t border-outline-variant z-50 shadow-lg dark:shadow-2xl dark:shadow-primary/10 transition-all duration-300">
+      {/* Bottom Navigation - Enhanced with premium styling */}
+      <nav className="fixed bottom-0 left-0 right-0 bg-card/95 backdrop-blur-md border-t border-border z-50 shadow-lg">
         <div className="flex items-center justify-around py-3 px-4 safe-area-inset-bottom relative">
-          {/* Active Tab Indicator - Enhanced for Dark Mode */}
+          {/* Active Tab Indicator */}
           <div
-            className="absolute top-0 h-1 bg-gradient-fitness-primary rounded-full transition-all duration-300 ease-out shadow-md dark:shadow-primary/50"
+            className="absolute top-0 h-1 bg-gradient-to-r from-primary to-primary rounded-full transition-all duration-300 ease-out"
             style={{
               width: "20%",
               left: `${tabs.findIndex((tab) => tab.id === activeTab) * 20}%`,
@@ -78,8 +78,8 @@ export default function TelegramNutritionApp() {
                 onClick={() => handleTabChange(tab.id)}
                 className={`flex flex-col items-center justify-center p-3 rounded-2xl transition-all duration-300 ease-out transform hover:scale-105 active:scale-95 ${
                   isActive
-                    ? "text-primary bg-primary-container shadow-lg animate-pulse-glow dark:shadow-primary/30"
-                    : "text-on-surface-variant hover:text-primary hover:bg-primary-container/30 dark:hover:bg-primary-container/20"
+                    ? "text-primary bg-primary/10 shadow-lg"
+                    : "text-muted-foreground hover:text-primary hover:bg-primary/5"
                 }`}
                 aria-label={tab.label}
                 style={{

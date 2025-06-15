@@ -16,7 +16,7 @@ export default function RecipesScreen() {
       title: "Personalized Recipes",
       description: "AI-powered meal suggestions based on your fitness goals",
       color: "text-primary",
-      bgColor: "bg-primary-container",
+      bgColor: "bg-primary/10",
     },
     {
       icon: Clock,

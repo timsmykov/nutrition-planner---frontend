@@ -1,0 +1,405 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Premium AI App Design System */
+
+@layer base {
+  :root {
+    /* Light theme - modern neutral palette */
+    --background: 0 0% 100%;
+    --foreground: 240 5% 6%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 240 5% 6%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 5% 6%;
+
+    /* Premium primary - modern blue gradient base */
+    --primary: 221 83% 53%;
+    --primary-foreground: 0 0% 98%;
+
+    /* Sophisticated secondary */
+    --secondary: 240 5% 96%;
+    --secondary-foreground: 240 6% 10%;
+
+    /* Modern muted tones */
+    --muted: 240 5% 96%;
+    --muted-foreground: 240 4% 46%;
+
+    /* Elegant accent */
+    --accent: 240 5% 96%;
+    --accent-foreground: 240 6% 10%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+
+    /* Subtle borders */
+    --border: 240 6% 90%;
+    --input: 240 6% 90%;
+    --ring: 221 83% 53%;
+
+    --radius: 0.75rem;
+
+    /* Sidebar modern styling */
+    --sidebar-background: 240 5% 98%;
+    --sidebar-foreground: 240 5% 15%;
+    --sidebar-primary: 221 83% 53%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 5% 95%;
+    --sidebar-accent-foreground: 240 6% 10%;
+    --sidebar-border: 240 6% 88%;
+    --sidebar-ring: 221 83% 53%;
+
+    /* Telegram theme variables - Base foundation */
+    --tg-theme-bg-color: #ffffff;
+    --tg-theme-text-color: #000000;
+    --tg-theme-hint-color: #999999;
+    --tg-theme-link-color: #2481cc;
+    --tg-theme-button-color: #2481cc;
+    --tg-theme-button-text-color: #ffffff;
+    --tg-theme-secondary-bg-color: #f1f1f1;
+
+  /* Light Mode - Fitness-Inspired Color Palette */
+  /* Primary - Deep Teal (Water/Hydration/Fitness) */
+  --fitness-primary: #0891b2;
+  --fitness-primary-container: #cffafe;
+  --fitness-on-primary: #ffffff;
+  --fitness-on-primary-container: #0c4a6e;
+
+  /* Secondary - Vibrant Green (Vegetables/Health) */
+  --fitness-secondary: #059669;
+  --fitness-secondary-container: #d1fae5;
+  --fitness-on-secondary: #ffffff;
+  --fitness-on-secondary-container: #064e3b;
+
+  /* Tertiary - Energetic Orange (Protein/Energy) */
+  --fitness-tertiary: #ea580c;
+  --fitness-tertiary-container: #fed7aa;
+  --fitness-on-tertiary: #ffffff;
+  --fitness-on-tertiary-container: #9a3412;
+
+  /* Accent - Berry Purple (Antioxidants/Fruits) */
+  --fitness-accent: #7c3aed;
+  --fitness-accent-container: #e0e7ff;
+  --fitness-on-accent: #ffffff;
+  --fitness-on-accent-container: #4c1d95;
+
+  /* Success - Fresh Green */
+  --fitness-success: #16a34a;
+  --fitness-success-container: #dcfce7;
+  --fitness-on-success: #ffffff;
+  --fitness-on-success-container: #14532d;
+
+  /* Warning - Sunny Yellow */
+  --fitness-warning: #eab308;
+  --fitness-warning-container: #fef3c7;
+  --fitness-on-warning: #000000;
+  --fitness-on-warning-container: #713f12;
+
+  /* Error - Deep Red */
+  --fitness-error: #dc2626;
+  --fitness-error-container: #fecaca;
+  --fitness-on-error: #ffffff;
+  --fitness-on-error-container: #7f1d1d;
+
+  /* Surface Colors - Modern Neutrals */
+  --fitness-surface: #fefefe;
+  --fitness-surface-container: #f8fafc;
+  --fitness-surface-variant: #f1f5f9;
+  --fitness-on-surface: #0f172a;
+  --fitness-on-surface-variant: #475569;
+
+  /* Outline Colors */
+  --fitness-outline: #cbd5e1;
+  --fitness-outline-variant: #e2e8f0;
+
+  /* Protein Colors (for macro tracking) */
+  --fitness-protein: #ef4444;
+  --fitness-protein-container: #fef2f2;
+
+  /* Carbs Colors */
+  --fitness-carbs: #3b82f6;
+  --fitness-carbs-container: #eff6ff;
+
+  /* Fat Colors */
+  --fitness-fat: #f59e0b;
+  --fitness-fat-container: #fffbeb;
+
+  /* Fiber Colors */
+  --fitness-fiber: #10b981;
+  --fitness-fiber-container: #f0fdf4;
+}
+
+/* Dark Mode - Enhanced Fitness Colors */
+.dark {
+  --tg-theme-bg-color: #0f172a;
+  --tg-theme-text-color: #f8fafc;
+  --tg-theme-hint-color: #64748b;
+  --tg-theme-link-color: #0ea5e9;
+  --tg-theme-secondary-bg-color: #1e293b;
+
+  /* Dark theme fitness colors - Enhanced contrast and vibrancy */
+  --fitness-primary: #06b6d4;
+  --fitness-primary-container: #164e63;
+  --fitness-on-primary: #000000;
+  --fitness-on-primary-container: #67e8f9;
+
+  --fitness-secondary: #22c55e;
+  --fitness-secondary-container: #166534;
+  --fitness-on-secondary: #000000;
+  --fitness-on-secondary-container: #86efac;
+
+  --fitness-tertiary: #fb923c;
+  --fitness-tertiary-container: #9a3412;
+  --fitness-on-tertiary: #000000;
+  --fitness-on-tertiary-container: #fed7aa;
+
+  --fitness-accent: #a855f7;
+  --fitness-accent-container: #581c87;
+  --fitness-on-accent: #000000;
+  --fitness-on-accent-container: #e9d5ff;
+
+  --fitness-success: #22c55e;
+  --fitness-success-container: #166534;
+  --fitness-on-success: #000000;
+  --fitness-on-success-container: #86efac;
+
+  --fitness-warning: #fbbf24;
+  --fitness-warning-container: #92400e;
+  --fitness-on-warning: #000000;
+  --fitness-on-warning-container: #fde68a;
+
+  --fitness-error: #f87171;
+  --fitness-error-container: #991b1b;
+  --fitness-on-error: #000000;
+  --fitness-on-error-container: #fecaca;
+
+  /* Dark Surface Colors */
+  --fitness-surface: #0f172a;
+  --fitness-surface-container: #1e293b;
+  --fitness-surface-variant: #334155;
+  --fitness-on-surface: #f8fafc;
+  --fitness-on-surface-variant: #cbd5e1;
+
+  /* Dark Outline Colors */
+  --fitness-outline: #475569;
+  --fitness-outline-variant: #334155;
+
+  /* Dark Macro Colors - Enhanced visibility */
+  --fitness-protein: #f87171;
+  --fitness-protein-container: #7f1d1d;
+
+  --fitness-carbs: #60a5fa;
+  --fitness-carbs-container: #1e3a8a;
+
+  --fitness-fat: #fbbf24;
+  --fitness-fat-container: #92400e;
+
+  --fitness-fiber: #34d399;
+  --fitness-fiber-container: #065f46;
+}
+
+/* Ensure smooth transitions for theme changes */
+html {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body {
+  background-color: var(--fitness-surface);
+  color: var(--fitness-on-surface);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Safe area handling for mobile devices */
+.safe-area-inset-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.safe-area-inset-top {
+  padding-top: env(safe-area-inset-top);
+}
+
+/* Custom scrollbar with fitness colors */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--fitness-surface-variant);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--fitness-primary);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--fitness-secondary);
+}
+
+/* Enhanced toggle switch styles with dark mode support */
+.toggle {
+  appearance: none;
+  width: 44px;
+  height: 24px;
+  background: var(--fitness-outline);
+  border-radius: 12px;
+  position: relative;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.toggle:checked {
+  background: var(--fitness-primary);
+}
+
+.toggle:focus {
+  outline: none;
+  border-color: var(--fitness-primary);
+  box-shadow: 0 0 0 2px var(--fitness-primary-container);
+}
+
+.toggle::before {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--fitness-on-surface);
+  top: 1px;
+  left: 1px;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.toggle:checked::before {
+  transform: translateX(20px);
+  background: var(--fitness-on-primary);
+}
+
+/* Focus styles for accessibility */
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--fitness-primary);
+  outline-offset: 2px;
+}
+
+/* Smooth transitions for dark mode - Enhanced */
+* {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, transform,
+    box-shadow;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
+}
+
+/* Custom animations */
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(8, 145, 178, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(8, 145, 178, 0);
+  }
+}
+
+@keyframes theme-switch {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    transform: rotate(180deg) scale(1.1);
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 2s infinite;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.5s ease-out;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s infinite;
+}
+
+.animate-theme-switch {
+  animation: theme-switch 0.6s ease-in-out;
+}
+
+/* Gradient backgrounds for fitness theme - Dark mode compatible */
+.gradient-fitness-primary {
+  background: linear-gradient(135deg, var(--fitness-primary), var(--fitness-secondary));
+}
+
+.gradient-fitness-energy {
+  background: linear-gradient(135deg, var(--fitness-tertiary), var(--fitness-accent));
+}
+
+.gradient-fitness-health {
+  background: linear-gradient(135deg, var(--fitness-secondary), var(--fitness-success));
+}
+
+/* Dark mode specific gradients */
+.dark .gradient-fitness-primary {
+  background: linear-gradient(135deg, var(--fitness-primary), var(--fitness-secondary));
+  box-shadow: 0 4px 20px rgba(6, 182, 212, 0.3);
+}
+
+.dark .gradient-fitness-energy {
+  background: linear-gradient(135deg, var(--fitness-tertiary), var(--fitness-accent));
+  box-shadow: 0 4px 20px rgba(251, 146, 60, 0.3);
+}
+
+.dark .gradient-fitness-health {
+  background: linear-gradient(135deg, var(--fitness-secondary), var(--fitness-success));
+  box-shadow: 0 4px 20px rgba(34, 197, 94, 0.3);
+}
+
+/* Ensure proper theme application */
+.dark * {
+  border-color: var(--fitness-outline-variant);
+}
+
+.dark input,
+.dark textarea,
+.dark select {
+  background-color: var(--fitness-surface-variant);
+  color: var(--fitness-on-surface);
+  border-color: var(--fitness-outline-variant);
+}
+
+.dark input:focus,
+.dark textarea:focus,
+.dark select:focus {
+  border-color: var(--fitness-primary);
+  box-shadow: 0 0 0 2px var(--fitness-primary-container);
+}

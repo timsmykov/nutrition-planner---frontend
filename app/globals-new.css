@@ -1,0 +1,300 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Premium AI App Design System */
+
+@layer base {
+  :root {
+    /* Light theme - modern neutral palette */
+    --background: 0 0% 100%;
+    --foreground: 240 5% 6%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 240 5% 6%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 5% 6%;
+
+    /* Premium primary - modern blue gradient base */
+    --primary: 221 83% 53%;
+    --primary-foreground: 0 0% 98%;
+
+    /* Sophisticated secondary */
+    --secondary: 240 5% 96%;
+    --secondary-foreground: 240 6% 10%;
+
+    /* Modern muted tones */
+    --muted: 240 5% 96%;
+    --muted-foreground: 240 4% 46%;
+
+    /* Elegant accent */
+    --accent: 240 5% 96%;
+    --accent-foreground: 240 6% 10%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+
+    /* Subtle borders */
+    --border: 240 6% 90%;
+    --input: 240 6% 90%;
+    --ring: 221 83% 53%;
+
+    --radius: 0.75rem;
+
+    /* Sidebar modern styling */
+    --sidebar-background: 240 5% 98%;
+    --sidebar-foreground: 240 5% 15%;
+    --sidebar-primary: 221 83% 53%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 5% 95%;
+    --sidebar-accent-foreground: 240 6% 10%;
+    --sidebar-border: 240 6% 88%;
+    --sidebar-ring: 221 83% 53%;
+
+    /* Telegram theme colors */
+    --tg-bg: #ffffff;
+    --tg-text: #000000;
+    --tg-hint: #999999;
+    --tg-link: #2481cc;
+    --tg-button: #2481cc;
+    --tg-button-text: #ffffff;
+    --tg-secondary: #f1f1f1;
+  }
+
+  .dark {
+    /* Dark theme - sophisticated dark palette */
+    --background: 240 6% 6%;
+    --foreground: 0 0% 98%;
+
+    --card: 240 4% 9%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 240 4% 9%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 221 83% 53%;
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 240 4% 12%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 240 4% 12%;
+    --muted-foreground: 240 5% 64%;
+
+    --accent: 240 4% 12%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 240 4% 18%;
+    --input: 240 4% 18%;
+    --ring: 221 83% 53%;
+
+    --sidebar-background: 240 6% 4%;
+    --sidebar-foreground: 0 0% 98%;
+    --sidebar-primary: 221 83% 53%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4% 10%;
+    --sidebar-accent-foreground: 0 0% 98%;
+    --sidebar-border: 240 4% 15%;
+    --sidebar-ring: 221 83% 53%;
+
+    /* Telegram dark theme */
+    --tg-bg: #0f172a;
+    --tg-text: #f8fafc;
+    --tg-hint: #64748b;
+    --tg-link: #0ea5e9;
+    --tg-button: #0ea5e9;
+    --tg-button-text: #ffffff;
+    --tg-secondary: #1e293b;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* Smooth scrolling for better UX */
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  /* Premium glass morphism effect */
+  .glass {
+    @apply bg-white/10 backdrop-blur-md border border-white/20;
+  }
+
+  .glass-dark {
+    @apply bg-black/10 backdrop-blur-md border border-white/10;
+  }
+
+  /* Premium gradient backgrounds */
+  .gradient-bg {
+    background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary)) 100%);
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-primary to-primary bg-clip-text text-transparent;
+  }
+
+  /* Enhanced shadows for depth */
+  .shadow-premium {
+    box-shadow: 
+      0 1px 3px 0 rgba(0, 0, 0, 0.1),
+      0 1px 2px 0 rgba(0, 0, 0, 0.06),
+      0 0 0 1px rgba(0, 0, 0, 0.05);
+  }
+
+  .shadow-premium-lg {
+    box-shadow: 
+      0 10px 15px -3px rgba(0, 0, 0, 0.1),
+      0 4px 6px -2px rgba(0, 0, 0, 0.05),
+      0 0 0 1px rgba(0, 0, 0, 0.05);
+  }
+
+  /* Premium button styles */
+  .btn-premium {
+    @apply relative overflow-hidden transition-all duration-300 ease-out;
+    @apply bg-gradient-to-r from-primary to-primary;
+    @apply hover:shadow-lg hover:shadow-primary/25;
+    @apply hover:scale-[1.02] active:scale-[0.98];
+  }
+
+  .btn-premium::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+  }
+
+  .btn-premium:hover::before {
+    left: 100%;
+  }
+}
+
+@layer utilities {
+  /* Smooth animations */
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.6s ease-out forwards;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.4s ease-out forwards;
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  /* Premium hover effects */
+  .hover-lift {
+    @apply transition-all duration-300 ease-out hover:transform hover:-translate-y-1 hover:shadow-premium-lg;
+  }
+
+  .hover-glow {
+    @apply transition-all duration-300 hover:shadow-lg hover:shadow-primary/20;
+  }
+
+  /* Text effects */
+  .text-shimmer {
+    background: linear-gradient(90deg, hsl(var(--foreground)) 0%, hsl(var(--primary)) 50%, hsl(var(--foreground)) 100%);
+    background-size: 200% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer 3s ease-in-out infinite;
+  }
+}
+
+/* Keyframe animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Custom scrollbar for premium feel */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--muted));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground));
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--primary));
+}
+
+/* Premium focus styles */
+.focus-premium:focus-visible {
+  @apply outline-none ring-2 ring-primary ring-offset-2 ring-offset-background;
+}

@@ -89,12 +89,17 @@ const config: Config = {
           from: { opacity: "0", transform: "translateY(10px)" },
           to: { opacity: "1", transform: "translateY(0)" },
         },
+        "pulse-glow": {
+          "0%, 100%": { boxShadow: "0 0 0 0 rgba(8, 145, 178, 0.4)" },
+          "50%": { boxShadow: "0 0 0 10px rgba(8, 145, 178, 0)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         shimmer: "shimmer 2s infinite",
         "fade-in": "fade-in 0.5s ease-out",
+        "pulse-glow": "pulse-glow 2s infinite",
       },
     },
   },
