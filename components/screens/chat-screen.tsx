@@ -144,13 +144,18 @@ export default function ChatScreen() {
 
     const editedContent = editedMessageContent.trim() || ""
 
-    // Update the existing message
+    // Update the existing message with proper null checks
     setDialogues((prev) =>
       prev.map((d) =>
         d.id === activeDialogueId
           ? {
               ...d,
-              messages: d.messages.map((m) => (m && m.id === editingMessageId ? { ...m, content: editedContent } : m)),
+              messages: d.messages
+                .map((m) => {
+                  if (!m || !m.id) return null
+                  return m.id === editingMessageId ? { ...m, content: editedContent } : m
+                })
+                .filter((m): m is Message => m !== null && m.id !== undefined && m.type !== undefined),
             }
           : d,
       ),
@@ -170,7 +175,7 @@ export default function ChatScreen() {
     setIsTyping(true)
 
     // Find and remove the previous bot response if it exists
-    const editedMessageIndex = activeDialogue.messages.findIndex((m) => m.id === editingMessageId)
+    const editedMessageIndex = activeDialogue.messages.findIndex((m) => m && m.id === editingMessageId)
     if (editedMessageIndex !== -1 && editedMessageIndex < activeDialogue.messages.length - 1) {
       const nextMessage = activeDialogue.messages[editedMessageIndex + 1]
       if (nextMessage && nextMessage.type === "bot") {
@@ -180,13 +185,37 @@ export default function ChatScreen() {
             d.id === activeDialogueId
               ? {
                   ...d,
-                  messages: d.messages.filter((m) => m.id !== nextMessage.id),
+                  messages: d.messages.filter((m) => m && m.id !== nextMessage.id),
                 }
               : d,
           ),
         )
       }
     }
+
+    // Simulate AI response after editing
+    setTimeout(() => {
+      setIsTyping(false)
+      const botMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        type: "bot",
+        content: `Great question! "${content}" 🎯 This is a demo response. In a real app, I'd provide personalized nutrition advice based on your fitness goals, dietary preferences, and current progress. Let's get you stronger and healthier! 💪`,
+        timestamp: new Date(),
+      }
+
+      setDialogues((prev) =>
+        prev.map((d) =>
+          d.id === activeDialogueId
+            ? {
+                ...d,
+                messages: [...d.messages.filter((m) => m && m.id && m.type), botMessage],
+                lastActivity: new Date(),
+              }
+            : d,
+        ),
+      )
+      setIsLoading(false)
+    }, 2000)
   }
 
   const cancelEditingMessage = () => {
@@ -378,22 +407,21 @@ export default function ChatScreen() {
                           </button>
                           {dialogues.length > 1 && (
                             <button
-  onClick={(e) => {
-    e.stopPropagation()
-    // Аномальная функция: например, удаляет только если имя диалога содержит "test"
-    if (dialogue.name && dialogue.name.toLowerCase().includes("test")) {
-      alert(`Диалог "${dialogue.name}" будет удалён!`)
-      handleDeleteDialogue(dialogue.id)
-    } else {
-      alert('Удаление разрешено только для диалогов с "test" в имени!')
-    }
-  }}
-  className="flex items-center w-full px-4 py-2 text-sm text-red-600 hover:bg-red-50 rounded-2xl transition-colors"
->
-  <Trash2 className="w-4 h-4 mr-2" />
-  <span>Delete</span>
-</button>
-
+                              onClick={(e) => {
+                                e.stopPropagation()
+                                // Аномальная функция: например, удаляет только если имя диалога содержит "test"
+                                if (dialogue.name && dialogue.name.toLowerCase().includes("test")) {
+                                  alert(`Диалог "${dialogue.name}" будет удалён!`)
+                                  deleteDialogue(dialogue.id)
+                                } else {
+                                  alert('Удаление разрешено только для диалогов с "test" в имени!')
+                                }
+                              }}
+                              className="flex items-center w-full px-4 py-2 text-sm text-red-600 hover:bg-red-50 rounded-2xl transition-colors"
+                            >
+                              <Trash2 className="w-4 h-4 mr-2" />
+                              <span>Delete</span>
+                            </button>
                           )}
                         </div>
                       )}
@@ -505,96 +533,98 @@ export default function ChatScreen() {
 
       {/* Messages */}
       <div className="flex-1 overflow-y-auto p-6 space-y-6 relative">
-        {activeDialogue?.messages?.filter(Boolean).map(
-          (message, index) =>
-            message && (
+        {activeDialogue?.messages
+          ?.filter(
+            (m): m is Message =>
+              m !== null && m !== undefined && typeof m === "object" && "id" in m && "type" in m && "content" in m,
+          )
+          .map((message, index) => (
+            <div
+              key={message.id}
+              className={`flex ${message.type === "user" ? "justify-end" : "justify-start"} animate-fade-in group`}
+              style={{ animationDelay: `${index * 100}ms` }}
+            >
               <div
-                key={message.id}
-                className={`flex ${message.type === "user" ? "justify-end" : "justify-start"} animate-fade-in group`}
-                style={{ animationDelay: `${index * 100}ms` }}
+                className={`flex items-end space-x-3 max-w-[85%] ${
+                  message.type === "user" ? "flex-row-reverse space-x-reverse" : ""
+                }`}
               >
                 <div
-                  className={`flex items-end space-x-3 max-w-[85%] ${
-                    message.type === "user" ? "flex-row-reverse space-x-reverse" : ""
+                  className={`w-12 h-12 rounded-full flex items-center justify-center shadow-lg ${
+                    message.type === "user"
+                      ? "bg-gradient-fitness-primary"
+                      : "bg-gradient-to-br from-secondary-container to-tertiary-container"
                   }`}
                 >
+                  {message.type === "user" ? (
+                    <User className="w-6 h-6 text-on-primary" />
+                  ) : (
+                    <Bot className="w-6 h-6 text-secondary" />
+                  )}
+                </div>
+                <div className="flex-1">
                   <div
-                    className={`w-12 h-12 rounded-full flex items-center justify-center shadow-lg ${
+                    className={`rounded-3xl p-5 shadow-lg border transition-all duration-200 hover:shadow-xl ${
                       message.type === "user"
-                        ? "bg-gradient-fitness-primary"
-                        : "bg-gradient-to-br from-secondary-container to-tertiary-container"
+                        ? "bg-gradient-fitness-primary text-on-primary border-primary/20 rounded-br-lg"
+                        : "bg-surface-container text-on-surface border-outline-variant rounded-bl-lg"
                     }`}
                   >
-                    {message.type === "user" ? (
-                      <User className="w-6 h-6 text-on-primary" />
-                    ) : (
-                      <Bot className="w-6 h-6 text-secondary" />
-                    )}
-                  </div>
-                  <div className="flex-1">
-                    <div
-                      className={`rounded-3xl p-5 shadow-lg border transition-all duration-200 hover:shadow-xl ${
-                        message.type === "user"
-                          ? "bg-gradient-fitness-primary text-on-primary border-primary/20 rounded-br-lg"
-                          : "bg-surface-container text-on-surface border-outline-variant rounded-bl-lg"
-                      }`}
-                    >
-                      {editingMessageId === message.id ? (
-                        <div className="space-y-3">
-                          <textarea
-                            value={editedMessageContent}
-                            onChange={(e) => setEditedMessageContent(e.target.value)}
-                            className="w-full bg-surface-variant text-on-surface rounded-2xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary border border-outline-variant resize-none"
-                            rows={3}
-                            autoFocus
-                          />
-                          <div className="flex space-x-2">
-                            <button
-                              onClick={saveEditedMessage}
-                              className="p-2 bg-success text-on-success rounded-full hover:bg-success/90 transition-all duration-200"
-                            >
-                              <Save className="w-4 h-4" />
-                            </button>
-                            <button
-                              onClick={cancelEditingMessage}
-                              className="p-2 bg-error text-on-error rounded-full hover:bg-error/90 transition-all duration-200"
-                            >
-                              <X className="w-4 h-4" />
-                            </button>
-                          </div>
+                    {editingMessageId === message.id ? (
+                      <div className="space-y-3">
+                        <textarea
+                          value={editedMessageContent}
+                          onChange={(e) => setEditedMessageContent(e.target.value)}
+                          className="w-full bg-surface-variant text-on-surface rounded-2xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary border border-outline-variant resize-none"
+                          rows={3}
+                          autoFocus
+                        />
+                        <div className="flex space-x-2">
+                          <button
+                            onClick={saveEditedMessage}
+                            className="p-2 bg-success text-on-success rounded-full hover:bg-success/90 transition-all duration-200"
+                          >
+                            <Save className="w-4 h-4" />
+                          </button>
+                          <button
+                            onClick={cancelEditingMessage}
+                            className="p-2 bg-error text-on-error rounded-full hover:bg-error/90 transition-all duration-200"
+                          >
+                            <X className="w-4 h-4" />
+                          </button>
                         </div>
-                      ) : (
-                        <>
-                          <p className="text-sm leading-relaxed font-medium">{message.content}</p>
-                          <div className="flex items-center justify-between mt-3">
-                            <p
-                              className={`text-xs font-medium ${
-                                message.type === "user" ? "text-on-primary/70" : "text-on-surface-variant"
+                      </div>
+                    ) : (
+                      <>
+                        <p className="text-sm leading-relaxed font-medium">{message.content}</p>
+                        <div className="flex items-center justify-between mt-3">
+                          <p
+                            className={`text-xs font-medium ${
+                              message.type === "user" ? "text-on-primary/70" : "text-on-surface-variant"
+                            }`}
+                          >
+                            {message.timestamp.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
+                          </p>
+                          {message.type === "user" && (
+                            <button
+                              onClick={() => startEditingMessage(message.id, message.content)}
+                              className={`opacity-0 group-hover:opacity-100 p-1 rounded-full transition-all duration-200 hover:scale-110 ${
+                                message.type === "user"
+                                  ? "hover:bg-on-primary/10 text-on-primary/70"
+                                  : "hover:bg-surface-variant text-on-surface-variant"
                               }`}
                             >
-                              {message.timestamp.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
-                            </p>
-                            {message.type === "user" && (
-                              <button
-                                onClick={() => startEditingMessage(message.id, message.content)}
-                                className={`opacity-0 group-hover:opacity-100 p-1 rounded-full transition-all duration-200 hover:scale-110 ${
-                                  message.type === "user"
-                                    ? "hover:bg-on-primary/10 text-on-primary/70"
-                                    : "hover:bg-surface-variant text-on-surface-variant"
-                                }`}
-                              >
-                                <Edit3 className="w-3 h-3" />
-                              </button>
-                            )}
-                          </div>
-                        </>
-                      )}
-                    </div>
+                              <Edit3 className="w-3 h-3" />
+                            </button>
+                          )}
+                        </div>
+                      </>
+                    )}
                   </div>
                 </div>
               </div>
-            ),
-        )}
+            </div>
+          ))}
 
         {isTyping && (
           <div className="flex justify-start animate-fade-in">
