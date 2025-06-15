@@ -1,21 +1,16 @@
 import type { Config } from "tailwindcss"
-import defaultConfig from "shadcn/ui/tailwind.config"
 
 const config: Config = {
-  darkMode: defaultConfig.darkMode,
+  darkMode: "class",
   content: [
-    ...defaultConfig.content,
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    ...defaultConfig.theme,
     extend: {
-      ...defaultConfig.theme.extend,
       colors: {
-        ...defaultConfig.theme.extend.colors,
         // Telegram theme colors
         "tg-bg": "var(--tg-theme-bg-color)",
         "tg-text": "var(--tg-theme-text-color)",
@@ -84,7 +79,6 @@ const config: Config = {
         "safe-right": "env(safe-area-inset-right)",
       },
       borderRadius: {
-        ...defaultConfig.theme.extend.borderRadius,
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
@@ -101,7 +95,9 @@ const config: Config = {
       },
     },
   },
-  plugins: [...defaultConfig.plugins, require("tailwindcss-animate")],
+  plugins: [require("tailwindcss-animate")],
 }
+
+export default config
 
 export default config
